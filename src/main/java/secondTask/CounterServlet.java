@@ -22,8 +22,4 @@ public class CounterServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         writer.println("Посетитель сайта номер: " + (++сount));
     }
-
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        doGet(request, response);
-    }
 }
