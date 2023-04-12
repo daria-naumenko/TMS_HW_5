@@ -45,4 +45,18 @@ public class MySQLDriverManager {
         }
         return students;
     }
+
+    public void addStudent(Student student) {
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            String sqlQuery = "INSERT INTO students(name, age, sex, course) VALUES (?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+            preparedStatement.setString(1, student.getName());
+            preparedStatement.setInt(2, student.getAge());
+            preparedStatement.setString(3, student.getSex());
+            preparedStatement.setInt(4, student.getCourse());
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            logger.error("Ошибка при добавлении студента в базу данных");
+        }
+    }
 }

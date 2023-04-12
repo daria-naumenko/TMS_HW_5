@@ -1,5 +1,7 @@
 package firstTask;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +33,7 @@ public class StudentServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         String name = req.getParameter("name");
         int age = Integer.parseInt(req.getParameter("age"));
@@ -44,6 +46,9 @@ public class StudentServlet extends HttpServlet {
         student.setSex(sex);
         student.setCourse(course);
 
-        resp.sendRedirect(req.getContextPath() + "/student");
+        studentInfo.addStudent(student);
+
+        req.setAttribute("student", student);
+        req.getRequestDispatcher("/WEB-INF/student.jsp").forward(req, resp);
     }
 }
