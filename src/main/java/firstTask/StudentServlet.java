@@ -49,6 +49,6 @@ public class StudentServlet extends HttpServlet {
         studentInfo.addStudent(student);
 
         req.setAttribute("student", student);
-        req.getRequestDispatcher("/WEB-INF/student.jsp").forward(req, resp);
+        req.getRequestDispatcher("/student.jsp").forward(req, resp);
     }
 }
